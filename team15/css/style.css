@@ -137,6 +137,7 @@ a:focus {
 
 .header_section {
   padding: 15px 0;
+	background-color: #000000
 }
 
 .header_section .container-fluid {
@@ -160,7 +161,7 @@ a:focus {
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
   padding: 5px 25px;
-  color: #000000;
+  color: #FFFFFF;
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
@@ -169,8 +170,8 @@ a:focus {
 }
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  color: #000000;
-  background-color: #ffffff;
+  color: #FFFFFF;
+  background-color: #00538B;
 }
 
 .custom_nav-container .navbar-toggler {
@@ -254,6 +255,22 @@ a:focus {
 .custom_nav-container .navbar-toggler[aria-expanded="false"] .s-3 {
   -webkit-transform: none;
           transform: none;
+}
+
+/* Setting the logo size */
+.logo {
+  width: 17vh;
+}
+.fa-user {
+	color: #FFFFFF;
+}
+
+.fa-cart-plus {
+	color: #FFFFFF;
+}
+
+.fa-search {
+	color: #FFFFFF;
 }
 
 .user_option-box {
@@ -444,7 +461,7 @@ a:focus {
   font-size: 15px;
 }
 
-.shop_section .btn-box {
+.shop_section .back-to-top {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -454,7 +471,7 @@ a:focus {
   margin-top: 45px;
 }
 
-.shop_section .btn-box a {
+.shop_section .back-to-top a {
   display: inline-block;
   padding: 10px 50px;
   background-color: #f0d43a;
@@ -465,7 +482,7 @@ a:focus {
   border: 1px solid #f0d43a;
 }
 
-.shop_section .btn-box a:hover {
+.shop_section .back-to-top a:hover {
   color: #ffffff;
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
@@ -763,7 +780,7 @@ a:focus {
 }
 
 .footer_section {
-  background-color: #3b4a6b;
+  background-color: #000000;
   color: #ffffff;
   padding-top: 60px;
 }
