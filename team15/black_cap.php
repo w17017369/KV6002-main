@@ -10,86 +10,6 @@ session_start();
 require_once( "functions.php" );
 // Make database connection 
 $connect = getConnection();
-
-//$message = '';
-
-/*// To check if a particular item has been added into cart, an if statement and under condition there's an isset function with the add_to_cart variable. If the cart variable .
-if ( isset( $_POST[ "add_to_cart" ] ) ) {
-  // If the item has already been added to the cart then this following block code will execute
-  if ( isset( $_COOKIE[ "shopping_cart" ] ) ) {
-    // Stripslashes function will remove any backslashes
-    $cookie_data = stripslashes( $_COOKIE[ 'shopping_cart' ] );
-    // This will convert JSON string to PHP variable and store it under cart_data variable 
-    $cart_data = json_decode( $cookie_data, true );
-    // Else if the if statement is false then the cart_data is equal to blank array
-  } else {
-    $cart_data = array();
-  }
-  // To get a list of item IDs that has been added into shopping cart, this function has been created. This will return value of item_id key from cart_data variable and store it under item_id_list variable
-  $item_id_list = array_column( $cart_data, 'item_id' );
-
-  // If a user has added the same item into the shopping cart then ONLY the quantity will need to be increased, not the whole item added again
-  if ( in_array( $_POST[ "hidden_id" ], $item_id_list ) ) {
-    // This foreach loop function is checking whether or not the same item has been added 
-    foreach ( $cart_data as $keys => $values ) {
-      // If the same item has been added then the quantity value will increase, so This code will not add new an item into the shopping cart, only the item quantity will be changed when the same item add has been added
-      if ( $cart_data[ $keys ][ "item_id" ] == $_POST[ "hidden_id" ] ) {
-        $cart_data[ $keys ][ "item_quantity" ] = $cart_data[ $keys ][ "item_quantity" ] + $_POST[ "quantity" ];
-      }
-    }
-    // Else if a new item has been added to the shopping cart then this block of code will be executed 
-  } else {
-    // Storing all form data (below) into item_array variable
-    $item_array = array(
-      'item_id' => $_POST[ "hidden_id" ], // item_id value is set to get from post hidden_id
-      'item_name' => $_POST[ "hidden_name" ], // item_name value is set to get from post hidden_name
-      'item_price' => $_POST[ "hidden_price" ], // item_price value is set to get from hidden_price
-      'item_quantity' => $_POST[ "quantity" ] // item_quantity value is set to get from quantity
-    );
-    // The item_array data is then stored into this $cart_data[]
-    $cart_data[] = $item_array;
-  }
-
-  // $item_data variable is created to convert PHP array to JSON string
-  // setcookie function takes three arguments - first argument is shopping_cart which is the name of this cookie, second argument is item_data which is data from $item_array which then stored under this shopping_cart variable and the third argument is the time function, 86400 * 30 = 1 day - meaning this cookie data will be expired after one day.
-  // Once a user has added an item into the cart, the page will redirect to shoppingCart.php?success=1
-  $item_data = json_encode( $cart_data );
-  setcookie( 'shopping_cart', $item_data, time() + ( 86400 * 30 ) );
-  header( "location:shoppingCart.php?success=1" );
-}
-
-if ( isset( $_GET[ "action" ] ) ) {
-
-  // Create Delete function - delete item from the shopping cart
-  if ( $_GET[ "action" ] == "delete" ) {
-    // Remove backslpashes
-    $cookie_data = stripslashes( $_COOKIE[ 'shopping_cart' ] );
-    // Convert JSON string to PHP variable
-    $cart_data = json_decode( $cookie_data, true );
-    foreach ( $cart_data as $keys => $values ) {
-      if ( $cart_data[ $keys ][ 'item_id' ] == $_GET[ "id" ] ) {
-        // Unset function will destroy $keys
-        unset( $cart_data[ $keys ] );
-        // To update array data in cookie variable, cart_data array needs to be converted to JSON string
-        $item_data = json_encode( $cart_data );
-        // setcookie function takes three arguments - first argument is shopping_cart which is the name of this cookie, second argument is item_data which is data from $item_array which then stored under this shopping_cart variable and the third argument is the time function, 86400 * 30 = 1 day. This function will update the shopping cart cookie data
-        // Once an item has been removed, the page will redirect to shoppingCart.php?remove=1
-        setcookie( "shopping_cart", $item_data, time() + ( 86400 * 30 ) );
-        header( "location:shoppingCart.php?remove=1" );
-      }
-    }
-  }
-  // This is 'Clear all' function
-  if ( $_GET[ "action" ] == "clear" ) {
-    // Time() - 3600 will expire shopping cart cookie variable with blank data so the shopping cart data will be destroyed
-    // Then this page will be redirected to shoppingCart.php?clearall=1 URL after a user has clicked clear all button
-    setcookie( "shopping_cart", "", time() - 3600 );
-    header( "location:shoppingCart.php?clearall=1" );
-  }
-
-} */
-
-
 ?>
 
 <!DOCTYPE html>
@@ -214,6 +134,7 @@ $result = $statement->fetchObject();
       <h2><?php echo "{$result->name}" ?></h2>
       <p>A simple black cap with the SF signature on. </p>
 			  <div>
+<!-- Heart toggle icon to allow users to save products to their favourites -->
   <i class="heart fa fa-heart-o"></i>
 </div>
     </div>
