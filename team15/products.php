@@ -107,20 +107,9 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
   <button class="btn btn-default filter-button" data-filter="hoodies">Hoodies</button>
   <button class="btn btn-default filter-button" data-filter="tshirts">T-shirts</button>	
 	
-	<!-- users can search through different items instead of scrolling through page -->
-<!--	<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Search items</button>
-  <div id="myDropdown" class="dropdown-content">
-    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-    <a href="#caps">Caps</a>
-    <a href="#hoodies">Hoodies</a>
-    <a href="#keyrings">Keyrings</a>
-    <a href="#mugs">Mugs</a>
-    <a href="#case">Phone cases</a>
-    <a href="#tees">T-shirts</a>
-    <a href="#glass">Wine glasses</a>
-  </div>
-</div> -->
+	<!-- users can search sort products by price, low to high or high to low -->
+	
+
 </div>
 
 	
@@ -202,7 +191,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="keyring1.php">
               <div class="img-box"> 
-				  <img src="img/key_holder1.png" alt="">
+				  <img src="img/keyholder1.png" alt="">
               </div>
               <div class="detail-box">
 				  			<?php
@@ -231,7 +220,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="keyring2.php">
               <div class="img-box"> 
-				  <img src="img/key_holder2.png" alt="">
+				  <img src="img/keyholder2.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -259,7 +248,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="keyring3.php">
               <div class="img-box"> 
-				  <img src="img/key_holder3.png" alt="">
+				  <img src="img/keyholder3.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -568,7 +557,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="plaint.php">
               <div class="img-box">
-                <img src="img/blankt.png" alt="">
+                <img src="img/blanktee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -596,7 +585,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="bluet.php">
               <div class="img-box">
-                <img src="img/bluet.png" alt="">
+                <img src="img/bluetee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -624,7 +613,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="coralt.php">
               <div class="img-box">
-                <img src="img/coralt.png" alt="">
+                <img src="img/coraltee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -652,7 +641,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="greent.php">
               <div class="img-box">
-                <img src="img/greent.png" alt="">
+                <img src="img/greentee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -708,7 +697,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="redt.php">
               <div class="img-box">
-                <img src="img/redt.png" alt="">
+                <img src="img/redtee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
@@ -736,7 +725,7 @@ ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
           <div class="box">
             <a href="tealt.php">
               <div class="img-box">
-                <img src="img/tealt.png" alt="">
+                <img src="img/tealtee.png" alt="">
               </div>
               <div class="detail-box">
 				  		<?php
