@@ -1,7 +1,9 @@
 <?php
 // Session variables are stored in a folder specified below
 
-ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
+//ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
+
+ini_set( "session.save_path", "/home/unn_w17017369/public_html/team15_practice/sessionData" );
 
 // Create a new session with a session ID
  session_start();
