@@ -6,6 +6,15 @@
 
   // Create a new session with a session ID
   session_start();
+
+  /**if (isset($_SESSION['user_id'])) {
+    echo("{$_SESSION['user_id']}"."<br />");
+    echo "exists";
+    echo "<a href='login.php>click here</a>";
+  } else {
+    echo("{$_SESSION['user_id']}"."<br />");
+    echo "doenst exist";
+  }**/
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +45,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -77,7 +89,7 @@
                           <i class='fa fa-user' aria-hidden='true'></i>
                         </button>
                         <ul class='dropdown-menu'>
-                          <li><a href='customerAccount.php'>Account</a></li>
+                          <li><a href='profile.php'>Account</a></li>
                           <li><a href='logout.php'>Log out</a></li>
                         </ul>
                       </div>"; // Logout button
@@ -90,14 +102,16 @@
                           <!--<span class='caret'></span>-->
                         </button>
                         <ul class='dropdown-menu'>
-                          <li><a href='customerAccount.php'>Account</a></li>
+                          <li><a href='profile.php'>Account</a></li>
                           <li><a href='login.php'>Login</a></li>
                         </ul>
                       </div>"; // Logout button
                     }
                 } catch ( Exception $e ) {
                   //Output error message
-                  echo "<p>problem occured</p>\n";
+                  //This error message has to be short because it will be displayed in place of login button 
+                  echo "<p>Unavaialble</p>\n";
+
                   //Log error
                   log_error( $e );
                 }

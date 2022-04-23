@@ -36,6 +36,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -77,7 +80,7 @@
                         <i class='fa fa-user' aria-hidden='true'></i>
                       </button>
                       <ul class='dropdown-menu'>
-                        <li><a href='custoemrAccount.php'>Account</a></li>
+                        <li><a href='profile.php'>Account</a></li>
                         <li><a href='logout.php'>Log out</a></li>
                       </ul>
                     </div>"; // Logout button
@@ -88,14 +91,15 @@
                       <i class='fa fa-user' aria-hidden='true'></i>
                     </button>
                     <ul class='dropdown-menu'>
-                      <li><a href='customerAccount.php'>Account</a></li>
+                      <li><a href='profile.php'>Account</a></li>
                       <li><a href='login.php'>Login</a></li>
                     </ul>
                   </div>"; // Logout button
                 }
               } catch ( Exception $e ) {
                 //Output error message
-                echo "<p>problem occured</p>\n";
+                //This error message has to be short because it will be displayed in place of login button 
+                echo "<p>Unavaialble</p>\n";
 
                 //Log error
                 log_error( $e );
@@ -130,7 +134,7 @@
 				  </div>
 				  <form class="login100-form validate-form" action="loginProcess.php" method="post">
             <div class="wrap-input100 validate-input m-b-26">
-              <input type="hidden" name="referer" value=""/> 
+              <input type="hidden" name="referer" value="<?= $referer?>"/> 
               <label class="label-input100" for="username"></label>  
               <input type="text" class="input100" id="username" size="30" tabindex="1" placeholder="Username" accesskey="u" name="username" pattern="^[A-Za-z0-9_]{1,15}$" size="20" maxlength="20" required>         
             </div>
@@ -151,6 +155,7 @@
 			  </div>
 		  </div> 
 	  </div>
+    <!-- main ends -->
 
     <!-- footer section -->
     <footer class="footer_section">

@@ -36,6 +36,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -77,7 +80,7 @@
                         <i class='fa fa-user' aria-hidden='true'></i>
                       </button>
                       <ul class='dropdown-menu'>
-                        <li><a href='customerAccount.php'>Account</a></li>
+                        <li><a href='profile.php'>Account</a></li>
                         <li><a href='logout.php'>Log out</a></li>
                       </ul>
                     </div>"; // Logout button
@@ -88,14 +91,16 @@
                       <i class='fa fa-user' aria-hidden='true'></i>
                     </button>
                     <ul class='dropdown-menu'>
-                      <li><a href='customerAccount.php'>Account</a></li>
+                      <li><a href='profile.php'>Account</a></li>
                       <li><a href='login.php'>Login</a></li>
                     </ul>
                   </div>"; // Logout button
                 }
               } catch ( Exception $e ) {
                 //Output error message
-                echo "<p>problem occured</p>\n";
+                //This error message has to be short because it will be displayed in place of login button 
+                echo "<p>Unavaialble</p>\n";
+
                 //Log error
                 log_error( $e );
               }
@@ -123,8 +128,8 @@
 		//Check if username or password is empty
 		if (empty($username) || empty($password)) {
 			//If empty display message
-			echo "<h1>LOGIN FAILED</h1>
-			<p>You need to provide a username and password. Please <a href='login.php'>try again.</a></p>\n";
+      echo "<h1 class='profile-error text-center'>Please fill in all the fields</h1>\n";
+      echo "<p class='profile-error text-center'>Click <a href='login.php'>here</a> to go back</p>";
 		}
 		else {
 			try {
@@ -132,7 +137,7 @@
 				$dbConn = getConnection();
 				
 				//Query database
-				$querySQL = "SELECT password_hash 
+				$querySQL = "SELECT password_hash, userid
 							FROM dsf_users
 							WHERE username = :username";
 				
@@ -153,46 +158,40 @@
 					if (password_verify($password, $password_hash)) {
 						//Set session variable-logged-in to true
 						$_SESSION['logged-in'] = true;
-						
+
+            //Store user id in session variable
+            $_SESSION['user_id'] = $user->userid;
+
 						//Check if referer is empty
 						if (empty($referer)) {
 							//If empty redirect browser to home page
 							header('Location: index.php');
 						}
 						else {
-							//If not empty the check if referer is the same as the customer account page url
-							if ($referer == 'customerAccount.php') {
-								//If so the redirect browser to customer account page
-								header('Location: customerAccount.php');
-							}
-              else if ($referer == 'adminAccount.php') {
-								header('Location: adminAccount.php');
-							}
-							else if ($referer == 'checkout as guest page') {
+							//If not empty the check if referer is the same as the checkout as guest page if so redirect to checkout
+							if ($referer == '#') {
 								header('Location: checkout.php');
-							}
-							else {
+							} else if ($referer == 'http://unn-w17017369.newnumyspace.co.uk/team15_test/registration.php') {
+                header('Location: index.php');
+              } else {
 								//If not then redirect back to url in referer
 								header("Location: ".$referer);
 							}
 						}	
-					} else {echo"password verify password: $password, passowrd hash: $passwordHash";}
-				}
-			  else {
+					} else {
+            echo "<h1 class='profile-error text-center'>Incorrect password.</h1>\n";
+            echo "<p class='profile-error text-center'>Please <a href='$referer'>try again</a></p>";
+          }
+				} else {
 					//Output message if username or password does not exist
-					echo "<div class='container'>
-						<div class='text-center py-5'>
-						<h1>The username or password entered is incorrect. Please <span class='try-again'><a href='login.php'>try again.</a></span></h1>
-						</div>
-						</div>\n";
+					echo "<h1 class='profile-error text-center'>User does not exist.</h1>\n";
+          echo "<p class='profile-error text-center'>Please <a href='$referer'>try again</a></p>";
 				}
 			} catch (Exception $e) {
 				//Output error message
-				echo "<div class='container'>
-					<div class='text-center py-5'>
-					<h1>Sorry there was a problem. Please <span class='try-again'><a href='login.php'>try again.</a></span></h1>
-					</div>
-					</div>\n";
+				echo "<h1 class='profile-error text-center'>There was a problem loading this page.</h1>\n";
+        echo "<p class='profile-error text-center'>Please <a href='login.php'>try again</a></p>";
+
 				//Log error 
 				log_error($e);
 			}

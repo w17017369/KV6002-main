@@ -36,6 +36,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -77,7 +80,7 @@
                         <i class='fa fa-user' aria-hidden='true'></i>
                       </button>
                       <ul class='dropdown-menu'>
-                        <li><a href='customerAccount.php'>Account</a></li>
+                        <li><a href='profile.php'>Account</a></li>
                         <li><a href='logout.php'>Log out</a></li>
                       </ul>
                     </div>"; // Logout button
@@ -88,14 +91,16 @@
                       <i class='fa fa-user' aria-hidden='true'></i>
                     </button>
                     <ul class='dropdown-menu'>
-                      <li><a href='cusomerAccount.php'>Account</a></li>
+                      <li><a href='profile.php'>Account</a></li>
                       <li><a href='login.php'>Login</a></li>
                     </ul>
                   </div>"; // Logout button
                 }
               } catch ( Exception $e ) {
                 //Output error message
-                echo "<p>problem occured</p>\n";
+                //This error message has to be short because it will be displayed in place of login button 
+                echo "<p>Unavaialble</p>\n";
+
                 //Log error
                 log_error( $e );
               }
@@ -133,22 +138,14 @@
 		//Check if first name, last name , username, password is empty
 		if (empty($firstname) || empty($username) || empty($newpassword) || empty($confirmpassword) || empty($email)) {
 			//If empty display message - URL needs to be changed depending on which group member is programming the website 
-			echo "<div class='container'>
-				<div class='text-center py-5'>
-				  <h1>PLEASE FILL IN ALL THE FIELDS</h1>
-			    <p>Please <span class='try-again'><a href='registration.php'>try again.</a></span></p>
-			  </div>
-			</div>\n";
+			echo "<h1 class='profile-error text-center'>Please fill in all the fields</h1>\n";
+      echo "<p class='profile-error text-center'>Click <a href='registration.php'>here</a> to go back</p>";
 		}
 	  //Check if both passwords are the same
 		else if ($newpassword != $confirmpassword) {
 			//If not display error message - URL needs to be changed depending on which group member is programming the websit
-			echo "<div class='container'>
-				<div class='text-center py-5'>
-					<h1>PASSWORDS DO NOT MATCH</h1>
-			    <p>Please <span class='try-again'><a href='registration.php'>try again.</a></span></p>
-			  </div>
-			</div>\n";
+			echo "<h1 class='profile-error text-center'>Passwords do not match</h1>\n";
+      echo "<p class='profile-error text-center'>Click <a href='registration.php'>here</a> to go back</p>";
 		}
 		else {
 			//set cost and store in variable
@@ -162,13 +159,14 @@
 				$dbConn = getConnection();
 				
 				//Insert new user record into databse
-				$querySQL = "INSERT INTO dsf_users (username, password_hash, phone, role, email, firstname, surname) VALUES (:username, :password_hash, :phone, 1, :email, :firstname, :surname)";
+				$querySQL = "INSERT INTO dsf_users (username, password_hash, phone, role, email, firstname, surname) 
+              VALUES (:username, :password_hash, :phone, 1, :email, :firstname, :surname)";
 				
 				//use prepared statement to execute query
 				$stmt = $dbConn->prepare($querySQL);
 				$stmt->execute(array(':username' => $username, ':password_hash' => $passwordHash, ':phone' => $phone, ':email' => $email, ':firstname' => $firstname, ':surname' => $surname));
 				
-				//use select query to retrieve usernames from databse
+				//use select query to retrieve all usernames from databse
 				$selectSQL = "SELECT username
 							FROM dsf_users";
 				//execute query and fetch data
@@ -176,39 +174,46 @@
         $user = $queryResult->fetchObject();
 				
 				if ($user) {
-					//check if username already exists in databse
+					//check if username already exists in database
 					if ($username == ':username') {
 						//if it does display error message
-						echo "<div class='container'>
-							<div class='text-center py-5'>
-								<h1>USERNAME IS ALREADY TAKEN</h1>
-						    <p>Please <span class='try-again'><a href='registration.php'>try again.</a></span></p>
-						  </div>
-						</div>\n";
+						echo "<h1 class='profile-error text-center'>Username is already taken</h1>\n";
+            echo "<p class='profile-error text-center'>Click <a href='registration.php'>here</a> to go back</p>";
 					} 
 					else {
 						//Set session variable-logged-in to true
 						$_SESSION['logged-in'] = true;
-						
-						//If username does not exist check if referer is the same as continue page url
-						if ($referer == '') {
-							//If it is redirect browser to checkout page
-							header('Location: checkout.php');
-						}
-						else {
-							//if not redirect to home page
-							header('Location: login.php');
-						}
+
+            $success= true;
+
+            if ($success) {
+              //Query database
+              $userSQL = "SELECT userid
+                    FROM dsf_users
+                    WHERE username = :username";
+              
+              //Prepare SQL statement using PDO
+              $userstmt = $dbConn->prepare($userSQL);
+              
+              //Execute query using PDO
+              $userstmt->execute(array(':username' => $username));
+              
+              //Retreive user record
+              $user_id = $userstmt->fetchObject();
+
+              $_SESSION['user_id'] = $user_id->userid;
+            } else {
+              echo "<h1 class='profile-error text-center'>There was a problem loading this page.</h1>\n";
+              echo "<p class='profile-error text-center'>Please <a href='registration.php'>try again</a></p>";
+            }
 					}
 				}
-			} catch (Exception $e) {
+			}
+       catch (Exception $e) {
 	    	//Output error message
-	  		echo "<div class='container'>
-					<div class='text-center py-5'>
-						<h1>USERNAME IS ALREADY TAKEN something else</h1>
-				    <p>Please <span class='try-again'><a href='registration.php'>try again.</a></span></p>
-				  </div>
-				</div>\n";
+	  		echo "<h1 class='profile-error text-center'>There was a problem loading this page.</h1>\n";
+        echo "<p class='profile-error text-center'>Please <a href='registration.php'>try again</a></p>";
+
 	  		//Log errors
 	  		log_error($e);
 			}

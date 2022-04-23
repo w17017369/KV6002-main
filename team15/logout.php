@@ -36,6 +36,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -44,7 +47,7 @@
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
-              <img src="images/logo/logo.png" style="width: 10%">
+              <img src="img/logo/logo.png" style="width: 10%">
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +80,7 @@
                       <i class='fa fa-user' aria-hidden='true'></i>
                     </button>
                     <ul class='dropdown-menu'>
-                      <li><a href='account.php'>Account</a></li>
+                      <li><a href='profile.php'>Account</a></li>
                       <li><a href='logout.php'>Log out</a></li>
                     </ul>
                     </div>"; // Logout button
@@ -88,14 +91,16 @@
                       <i class='fa fa-user' aria-hidden='true'></i>
                     </button>
                     <ul class='dropdown-menu'>
-                      <li><a href='account.php'>Account</a></li>
+                      <li><a href='profile.php'>Account</a></li>
                       <li><a href='loginForm.php'>Login</a></li>
                     </ul>
                   </div>"; // Logout button
                 }
               } catch ( Exception $e ) {
                 //Output error message
-                echo "<p>problem occured</p>\n";
+                //This error message has to be short because it will be displayed in place of login button 
+                echo "<p>Unavaialble</p>\n";
+
                 //Log error
                 log_error( $e );
               }
@@ -132,7 +137,8 @@
 			header("Location: ".$referer);
 		} catch (Exception $e) {
 			//Output error message
-			echo "<h1>Sorry there was a problem. Please <a href='$referer'>try again.</a></h1>\n";
+			echo "<h1 class='profile-error text-center'>There was a problem logging out.</h1>\n";
+      echo "<p class='profile-error text-center'>Please <a href='$referer'>try again</a></p>";
 
 			//Log error
 			log_error($e);
