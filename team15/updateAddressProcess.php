@@ -202,7 +202,7 @@
               $stmt1 = $dbConn->prepare($insertSQL);
               $stmt1->execute(array(':nickname' => $nickname, ':name' => $name, ':line1' => $line1, ':line2' => $line2, ':postcode' => $postcode, ':phone' => $phone));
 
-              //Display updated details to user
+              //Display new details to user
               echo "<div class='user-dashboard'>
                   <div class='row'>
                     <h1 class='text-center'>Your details have been added:</h1>
