@@ -92,7 +92,7 @@ a:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding-left: 45px;
+  /*padding-left: 45px;*/
 }
 
 .hero_area .hero_social {
