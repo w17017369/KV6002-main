@@ -157,16 +157,18 @@
                 <h1>Add address</h1>
                 <div class='row'>
                   <form class='update-details-form' action='updateAddressProcess.php' method='post'>
-                    <label class='update-details-label' for='name'>Name:</label>
-                    <input type='text' class='form-control' name='name' placeholder='Full name' pattern='[a-zA-Z]+' title='Only alphabets are allowed' size='20' minlenght='1' maxlength='20' accesskey='f'  tabindex='1' required />                        
-                    <label class='update-details-label' for='line1'>Address line 1:</label>
-                    <input class='update-details-input' type='text' class='form-control' name='line1' placeholder='Address line 1' pattern='\d+\s[A-z]+\s[A-z]+' title='Building name or number' size='50 minlength='1' maxlength='50' tabindex='2' required />                          
+                    <label class='update-details-label' for='nickname'>Address nickname:</label>
+                    <input class='update-details-input' type='text' class='form-control' name='nickname' placeholder='Home' size='20' minlenght='1' maxlength='20' accesskey='f'  tabindex='1'/>  
+                    <label class='update-details-label' for='name'>*Full name:</label>
+                    <input class='update-details-input' type='text' class='form-control' name='name' placeholder='John Smith' size='20' minlenght='1' maxlength='20' accesskey='f'  tabindex='2' required />                        
+                    <label class='update-details-label' for='line1'>*Address line 1:</label>
+                    <input class='update-details-input' type='text' class='form-control' name='line1' placeholder='12 Main street' size='50 minlength='1' maxlength='50' tabindex='3' required />                          
                     <label class='update-details-label' for='line2'>Address line 2:</label>
-                    <input class='update-details-input' type='text' class='form-control' name='line2' placeholder='Address line 2' pattern='[A-z]+\s[A-z]+' title='City' size='50' minlength='1' tabindex='3' maxlength='50'/>                           
-                    <label class='update-details-label' for='postcode'>Postcode:</label>
-                    <input class='update-details-input' type='text' class='form-control' name='postcode' placeholder='Postcode' pattern='[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}' title='post code' size='7' minlength='1' maxlength='8' tabindex='4' required />                       
-                    <label class='update-details-label' for='phone'>Phone:</label>
-                    <input class='update-details-input' type='text' class='form-control' name='phone' placeholder='Phone number' size='11' minlenght='11' maxlength='11' accesskey='p' tabindex='5' required />                           
+                    <input class='update-details-input' type='text' class='form-control' name='line2' placeholder='Newcastle Upon Tyne' size='50' minlength='1' tabindex='4' maxlength='50'/>                           
+                    <label class='update-details-label' for='postcode'>*Postcode:</label>
+                    <input class='update-details-input' type='text' class='form-control' name='postcode' placeholder='NE1 6PT' pattern='[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}' title='e.g. NE1 6PT (with a space)' size='7' minlength='1' maxlength='8' tabindex='5' required />                       
+                    <label class='update-details-label' for='phone'>*Phone:</label>
+                    <input class='update-details-input' type='text' class='form-control' name='phone' placeholder='07967829036' size='11' minlenght='11' maxlength='11' accesskey='p' tabindex='6' required />                           
                     <div class='update-details-submit'>
                       <button type='submit' class='btn btn-primary'>Add address</button>
                     </div>
@@ -202,17 +204,20 @@
             <div class='user-dashboard'>
               <h1>Update address</h1>
               <div class='row'>
-                <form class='update-details-form' action='addressBookProcess.php' method='post'> 
-                  <label class='update-details-label' for='name'>Name:</label>
-                  <input class='update-details-input' type='text' class='form-control' name='name' value='{$rowObj->real_name}' title='Only alphabets are allowed' size='50' minlenght='1' maxlength='50' accesskey='f'  tabindex='1' required />               
-                  <label class='update-details-label' for='line1'>Address line 1:</label>
-                  <input class='update-details-input' type='text' class='form-control' name='line1' value='{$rowObj->addressline1}' pattern='\d+\s[A-z]+\s[A-z]+' title='Building name or number' size='50 minlength='1' maxlength='50' tabindex='2' required />
+                <form class='update-details-form' action='updateAddressProcess.php' method='post'> 
+                <input type='hidden' name='address_id' value='$address_id'>
+                  <label class='update-details-label' for='nickname'>Address nickname:</label>
+                  <input class='update-details-input' type='text' class='form-control' name='nickname' value='{$rowObj->nickname}' size='20' minlenght='1' maxlength='20' accesskey='f'  tabindex='1'/>
+                  <label class='update-details-label' for='name'>*Full name:</label>
+                  <input class='update-details-input' type='text' class='form-control' name='name' value='{$rowObj->real_name}' size='50' minlenght='1' maxlength='50' accesskey='f'  tabindex='2' required />               
+                  <label class='update-details-label' for='line1'>*Address line 1:</label>
+                  <input class='update-details-input' type='text' class='form-control' name='line1' value='{$rowObj->addressline1}' size='50 minlength='1' maxlength='50' tabindex='3' required />
                   <label class='update-details-label' for='line2'>Address line 2:</label>
-                  <input class='update-details-input' type='text' class='form-control' name='line2' value='{$rowObj->addressline2}' pattern='[A-z]+\s[A-z]+' title='City' size='50' minlength='1' maxlength='50' tabindex='3'/>               
-                  <label class='update-details-label' for='postcode'>Postcode:</label>
-                  <input class='update-details-input' type='text' class='form-control' name='postcode' value='{$rowObj->postcode}' pattern='[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}' title='Post code' size='7' minlength='1' maxlength='8' tabindex='4' required />              
-                  <label class='update-details-label' for='phone'>Phone:</label>
-                  <input class='update-details-input' type='text' class='form-control' name='phone' value='{$rowObj->tel_phone}' size='11' minlenght='11' maxlength='11' accesskey='p' tabindex='5' required />                  
+                  <input class='update-details-input' type='text' class='form-control' name='line2' value='{$rowObj->addressline2}' size='50' minlength='1' maxlength='50' tabindex='4'/>               
+                  <label class='update-details-label' for='postcode'>*Postcode:</label>
+                  <input class='update-details-input' type='text' class='form-control' name='postcode' value='{$rowObj->postcode}' pattern='[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}' title='e.g. NE1 6PT (with a space)' size='7' minlength='1' maxlength='8' tabindex='5' required />              
+                  <label class='update-details-label' for='phone'>*Phone:</label>
+                  <input class='update-details-input' type='text' class='form-control' name='phone' value='{$rowObj->tel_phone}' size='11' minlenght='11' maxlength='11' accesskey='p' tabindex='6' required />                  
                   <div class='update-details-submit'>
                     <button type='submit' class='btn btn-primary'>Save changes</button>
                   </div>

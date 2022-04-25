@@ -24,7 +24,7 @@
 
     <!-- Bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <!-- Owl slider stylesheet -->
+    <!--Owl slider stylesheet -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
     <!-- Font awesome style -->
@@ -36,7 +36,7 @@
     <!-- Responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
-    <!-- Account pages style-->
+    <!-- Account page style -->
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
     <script src="script.js"></script>
   </head>
@@ -46,7 +46,6 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <!-- Logo -->
           <a class="navbar-brand" href="index.php">
             <img src="img/logo.png" style="width: 10%">
           </a>
@@ -60,7 +59,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="products.php"> Products </a>
@@ -126,23 +125,10 @@
     <!-- main -->
     <?php
     try {
-      //Check if user_id exists 
-      if (isset($_SESSION[ 'user_id'])) {
-        //If user_id exists store user_id in variable
-        $user_id = $_SESSION[ 'user_id'];
-
-        //Get database connection
-        $dbConn = getConnection();
-              
-        //Create a sql query to retrieve address for current user using user_id
-        $selectSQL = "SELECT *
-              FROM address_info
-              WHERE userid = $user_id";
-              
-        //Execute the query
-        $queryResult = $dbConn->query( $selectSQL );
-                                
-        //Display dashboard
+      //Check if user_id exists
+      if (isset($_SESSION['user_id'])) {
+        //if user_id exists store user_id in variable
+        $user_id = $_SESSION[ 'user_id']; 
         echo "<div class='container-fluid display-table'>
           <div class='row display-table-row'>
             <div class='col-md-2 col-sm-1 hidden-xs display-table-cell v-align box' id='dashboard'>
@@ -157,76 +143,160 @@
                 </ul>
               </div>
             </div>
-          <div class='col-md-10 col-sm-11 display-table-cell v-align'>  
-            <div class='user-dashboard'>
-              <h1>My addresses</h1>";
+            <div class='col-md-10 col-sm-11 display-table-cell v-align'>";
+            
+        //Retrieve variables
+        $name = filter_has_var(INPUT_POST, 'name') ? $_POST['name'] : null;
+        $line1 = filter_has_var(INPUT_POST, 'line1') ? $_POST['line1'] : null;
+        $line2 = filter_has_var(INPUT_POST, 'line2') ? $_POST['line2'] : null;
+        $postcode = filter_has_var(INPUT_POST, 'postcode') ? $_POST['postcode'] : null;
+        $phone = filter_has_var(INPUT_POST, 'phone') ? $_POST['phone'] : null;
+        $nickname = filter_has_var(INPUT_POST, 'nickname') ? $_POST['nickname'] : null;
+        $address_id = filter_has_var(INPUT_POST, 'address_id') ? $_POST['address_id'] : null;
 
-      //Store result in variable
-      $rowObj = $queryResult->fetchObject();
-                                  
-      //Check if variable is not empty
-      if (!empty($rowObj)) {
-        //Loop results
-        while ($rowObj = $queryResult->fetchObject()) {
-          //Display results in table
-          echo "<table class='table'>
-            <tr>
-              <th><h3>{$rowObj->nickname}</h3></th>
-                <td style='text-align:right;'>
-                  
-                  <a href='updateAddress.php?address_id={$rowObj->address_id}'><i class='fa-solid fa-pencil'></i></a>
-                  <a href='deleteAddress.php?address_id={$rowObj->address_id}'><i class='fa-solid fa-trash-can'></i></a>
-                </td>                              
-              </tr>       
-              <tr>
-                <th>Name</th>
-                <td>{$rowObj->real_name}</td>
-              </tr>
-              <tr>
-                <th>Address Line 1</th>
-                <td>{$rowObj->addressline1}</td>
-              </tr>
-              <tr>
-                <th>Address Line 2</th>
-                <td>{$rowObj->addressline2}</td>
-              </tr>
-              <tr>
-                <th>Postcode</th>
-                <td>{$rowObj->postcode}</td>
-              </tr>
-              <tr>
-                <th>Phone</th>
-                <td>{$rowObj->tel_phone}</td>
-              </tr>";  
-          }
-          echo "</table>
-              <div class='col-md-12 text-center' style='margin-top: 5%; margin-bottom: 5%;'>
-                <a href='updateAddress.php'><button type='button' class='btn btn-primary'>Add an address</button></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>\n";
+        //Remove whitespace from beginning and end of the string
+        $name = trim($name);
+        $line1 = trim($line1);
+        $line2 = trim($line2);
+        $postcode = trim($postcode);
+        $phone = trim($phone);
+        $nickname = trim($nickname);
+            
+        //Set variable to false
+        $error = false;
+
+        //Check if referer exists
+        if (isset($_SERVER['HTTP_REFERER'])) {
+          //If it does then store referer in variable
+          $referer = $_SERVER['HTTP_REFERER'];
         } else {
-          //If variable if empty display message
-          echo "<h1 class='profile-error text-center'>You have no addresses available.</h1>\n";
-          echo "<p class='profile-error text-center'><a href='updateAddress.php'>Add an address</a></p>
+          //If not then store index.php in variable
+          $referer = 'addressBook.php';
+        }
+
+        //Check for empty fields
+        if (empty($name) || empty($line1) || empty($postcode) || empty($phone)) {
+          echo "<h1 class='profile-error text-center'>Please fill in all the fields</h1>\n";
+          echo "<p class='profile-error text-center'>Click <a href='$referer'>here</a> to go back</p>";
+          $error = true;
+        }
+
+        //Check if phone number is too long
+        if (strlen($phone) > 11) {
+          echo "<h1 class='profile-error text-center'>Please enter a 11 digit phone number</h1>\n";
+          echo "<p class='profile-error text-center'>Click <a href='$referer'>here</a> to go back</p>";
+          $error = true;
+        }
+
+        if ($error == false) {
+          try {
+            //Get database connection
+            $dbConn = getConnection();
+
+            if (empty($address_id)) {
+              //Insert record using PDO
+              $insertSQL = "INSERT INTO address_info (nickname, userid, real_name, addressline1, addressline2, postcode, tel_phone) 
+              VALUES (:nickname, $user_id, :name, :line1, :line2, :postcode, :phone)";
+
+              //Execute query
+              $stmt1 = $dbConn->prepare($insertSQL);
+              $stmt1->execute(array(':nickname' => $nickname, ':name' => $name, ':line1' => $line1, ':line2' => $line2, ':postcode' => $postcode, ':phone' => $phone));
+
+              //Display updated details to user
+              echo "<div class='user-dashboard'>
+                  <div class='row'>
+                    <h1 class='text-center'>Your details have been added:</h1>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td class='details-column'><b>Address nickname:</b></td>
+                          <td class='profile-first-column'>".filter_var($nickname, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Name:</b></td>
+                          <td class='profile-first-column'>".filter_var($name, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Address:</b></td>
+                          <td class='profile-first-column'>".filter_var($line1, FILTER_SANITIZE_STRING)."</br>".filter_var($line2, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Postcode:</b></td>
+                          <td class='profile-column'>".filter_var($postcode, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Phone:</b></td>
+                          <td class='profile-column'>".filter_var($phone, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                      </tbody>  
+                    </table>                      
+                  </div>
+                </div>\n"; 
+            } else {
+              $updateSQL = "UPDATE address_info 
+                    SET nickname = :nickname, real_name = :name, addressline1 = :line1, addressline2 = :line2, postcode = :postcode, tel_phone = :phone
+                    WHERE address_id = $address_id";
+
+              //Execute query
+              $stmt2 = $dbConn->prepare($updateSQL);
+              $stmt2->execute(array(':nickname' => $nickname, ':name' => $name, ':line1' => $line1, ':line2' => $line2, ':postcode' => $postcode, ':phone' => $phone));
+
+              //Display updated detaila to user
+              echo "<div class='user-dashboard'>
+                  <div class='row'>
+                    <h1 class='text-center'>Your details have been updated to:</h1>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td class='details-column'><b>Address nickname:</b></td>
+                          <td class='profile-first-column'>".filter_var($nickname, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Name:</b></td>
+                          <td class='profile-first-column'>".filter_var($name, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Address:</b></td>
+                          <td class='profile-first-column'>".filter_var($line1, FILTER_SANITIZE_STRING)."</br>".filter_var($line2, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Postcode:</b></td>
+                          <td class='profile-column'>".filter_var($postcode, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                        <tr>
+                          <td class='details-column'><b>Phone:</b></td>
+                          <td class='profile-column'>".filter_var($phone, FILTER_SANITIZE_STRING)."</td>
+                        </tr>
+                      </tbody>  
+                    </table>                      
+                  </div>
+                </div>\n"; 
+            }        
+          } catch (Exception $e) {
+            //Output error message
+            echo "<h1 class='profile-error text-center'>There was a problem loading this page.sql</h1>\n";
+            echo "<p class='profile-error text-center'>Please <a href='updateDetails.php'>try again</a></p>";
+        
+            //Log errors
+            log_error($e);
+          }
+        }
+        //Closing divs from echo
+        echo "</div>
           </div>
-        </div>
-      </div>";    
-        } 
+        </div>\n";
       } else {
-        //If user_id does not exist display message
+        //If user does not exist display error message
         echo "<h1 class='profile-error text-center'>Please <a href='login.php'>log in</a> to access this page.</h1>\n";
       }
-    } catch ( Exception $e ) {
+    } catch (Exception $e) {
       //Output error message
-      echo "<h1 class='profile-error text-center'>There was a problem loading this page.</h1>\n";
-      echo "<p class='profile-error text-center'>Please <a href='addressBook.php'>try again</a></p>";    
-
-      //Log error
-      log_error( $e );
-    } 
+      echo "<h1 class='profile-error text-center'>There was a problem loading this page.</h1>use\n";
+      echo "<p class='profile-error text-center'>Please <a href='updateDetails.php'>try again</a></p>";
+      
+      //Log errors
+      log_error($e);
+    }                    
     ?>
     <!-- main ends -->
     
