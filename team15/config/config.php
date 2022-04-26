@@ -1,7 +1,7 @@
 <?php
 
 const SUPPORT_EMAIL =  'deffetto.style@gmail.com';
-const DEVELOPMENT_MODE = true;
+const DEVELOPMENT_MODE = false;
 
 const PDO_CONNECTION = [
     "host" => "localhost",
