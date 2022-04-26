@@ -4,10 +4,10 @@ const SUPPORT_EMAIL =  'deffetto.style@gmail.com';
 const DEVELOPMENT_MODE = true;
 
 const PDO_CONNECTION = [
-    "host" => "127.0.0.1",
-    "dbName" => "KF6002",
-    "username" => "root",
-    "password" => ""
+    "host" => "localhost",
+    "dbName" => "unn_w19020174",
+    "username" => "unn_w19020174",
+    "password" => "PnaMtn94"
 ];
 ini_set('display_errors', DEVELOPMENT_MODE);
 ini_set('display_startup_errors', DEVELOPMENT_MODE);
