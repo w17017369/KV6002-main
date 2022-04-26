@@ -4,6 +4,16 @@
 
   //Create a new session with a session ID
   session_start();
+
+  //include config.php 
+  include "config/config.php";
+  use SRC\Subscriber;
+  
+  //If true create a new Subscriber object and make subscription 
+  if ($_POST) {
+  $subscriber = new Subscriber();
+  $return = $subscriber->subscribe($_POST);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +30,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Timups</title>
+    <title>D'Effetto</title>
 
     <!-- Bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -132,98 +142,98 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class="slider_section ">
-      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container-fluid ">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="detail-box">
-                    <h1>
-                      Smart Watches
-                    </h1>
-                    <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="">
+  <section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="container-fluid ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="detail-box">
+                  <h1>
+                    Smart Watches
+                  </h1>
+                  <p>
+                    Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                  </p>
+                  <div class="btn-box">
+                    <a href="" class="btn1">
+                      Contact Us
+                    </a>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container-fluid ">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="detail-box">
-                    <h1>
-                      Smart Watches
-                    </h1>
-                    <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container-fluid ">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="detail-box">
-                    <h1>
-                      Smart Watches
-                    </h1>
-                    <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="img-box">
-                    <img src="images/slider-img.png" alt="">
-                  </div>
+              <div class="col-md-6">
+                <div class="img-box">
+                  <img src="assets/images/slider-img.png" alt="">
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <ol class="carousel-indicators">
-          <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-          <li data-target="#customCarousel1" data-slide-to="1"></li>
-          <li data-target="#customCarousel1" data-slide-to="2"></li>
-        </ol>
+        <div class="carousel-item ">
+          <div class="container-fluid ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="detail-box">
+                  <h1>
+                    Smart Watches
+                  </h1>
+                  <p>
+                    Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                  </p>
+                  <div class="btn-box">
+                    <a href="" class="btn1">
+                      Contact Us
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="img-box">
+                  <img src="assets/images/slider-img.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item ">
+          <div class="container-fluid ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="detail-box">
+                  <h1>
+                    Smart Watches
+                  </h1>
+                  <p>
+                    Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                  </p>
+                  <div class="btn-box">
+                    <a href="" class="btn1">
+                      Contact Us
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="img-box">
+                  <img src="assets/images/slider-img.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <ol class="carousel-indicators">
+        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+        <li data-target="#customCarousel1" data-slide-to="1"></li>
+        <li data-target="#customCarousel1" data-slide-to="2"></li>
+      </ol>
+    </div>
 
-    </section>
-    <!-- end slider section -->
-  </div>
+  </section>
+  <!-- end slider section -->
+</div>
 
   <!-- shop section -->
 
@@ -423,208 +433,189 @@
 
   <!-- about section -->
 
-  <section class="about_section">
-    <div class="container  ">
-      <div class="row">
-        <div class="col-md-6 col-lg-5 ">
-          <div class="img-box">
-            <img src="images/about-img.png" alt="">
-          </div>
+<section class="about_section">
+  <div class="container  ">
+    <div class="row">
+      <div class="col-md-6 col-lg-5 ">
+        <div class="img-box">
+          <img src="assets/images/about-img.png" alt="">
         </div>
-        <div class="col-md-6 col-lg-7">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Us
-              </h2>
+      </div>
+      <div class="col-md-6 col-lg-7">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              About Us
+            </h2>
+          </div>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+            in some form, by injected humour, or randomised words which don't look even slightly believable. If you
+            are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
+            the middle of text. All
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end about section -->
+
+<!-- newsletter section -->
+
+<section class="newsletter_section layout_padding">
+  <div class="container">
+    <div class="row">
+        <div class="heading_container">
+            <h2>
+                Join our D’Effetto World!!!
+            </h2>
+            <h3>
+                Sign-up to our Newsletter and we will keep you up to date
+            </h3>
+        </div>
+        <div class="col-md-6">
+        <div class="form_container" id="newsletter">
+          <p>
+            With any upcoming products, the latest offers, and precious tips to share the best drinks ever!
+          </p>
+            <?php
+            if ($_POST) {
+                echo <<<EOT
+<div class="alert">
+<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+$return
+</div>
+EOT;
+            }
+            ?>
+          <form action="index.php#newsletter" method="post" >
+            <div>
+              <input type="text" placeholder="Full Name" name="name" >
             </div>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
-            </p>
+            <div>
+              <input type="email" placeholder="Email" name="email" >
+            </div>
+            <div class="d-flex ">
+              <button type="submit" value="Subscribe" onClick="goHere()">
+                Subscribe
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="col-md-6">
+            <div class="img-box">
+                <img src="assets/images/email-3249062.png" alt="newsletter">
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+<!-- end newsletter section -->
+<!-- footer section -->
+<footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_detail">
+          <h4>
+            About
+          </h4>
+          <p>
+            Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+          </p>
+          <div class="footer_social">
             <a href="">
-              Read More
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
             </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- end about section -->
-    
-  <!-- client section -->
-  <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Testimonial
-        </h2>
-      </div>
-      <div class="carousel-wrap ">
-        <div class="owl-carousel client_owl-carousel">
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/c1.jpg" alt="">
-              </div>
-              <div class="detail-box">
-                <div class="client_info">
-                  <div class="client_name">
-                    <h5>
-                      Mark Thomas
-                    </h5>
-                    <h6>
-                      Customer
-                    </h6>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore
-                  et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum
-                  dolore eu fugia
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/c2.jpg" alt="">
-              </div>
-              <div class="detail-box">
-                <div class="client_info">
-                  <div class="client_name">
-                    <h5>
-                      Alina Hans
-                    </h5>
-                    <h6>
-                      Customer
-                    </h6>
-                  </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore
-                  et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum
-                  dolore eu fugia
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end client section -->
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_detail">
-            <h4>
-              About
-            </h4>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-            </p>
-            <div class="footer_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Reach at..
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Reach at..
+          </h4>
+          <div class="contact_link_box">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
                   Location
                 </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
                   Call +01 1234567890
                 </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                  deffetto.style@gmail.com
                 </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Subscribe
-            </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
-        </p>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Subscribe
+          </h4>
+          <form action="index.php#newsletter" method="post">
+              <input type="text" placeholder="Full Name" name="name" />
+            <input type="email" placeholder="Enter email" name="email" />
+            <button type="submit" onClick="goHere()">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="map_container">
+          <div class="map">
+            <div id="googleMap"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
-  <!-- footer section -->
+    <div class="footer-info">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- footer section -->
 
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- custom js -->
-  <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
+<!-- jQery -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<!-- bootstrap js -->
+<script src="js/bootstrap.js"></script>
+<!-- owl slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!-- custom js -->
+<script src="js/custom.js"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+<!-- End Google Map -->
 
+<script>
+    function goHere() {
+        window.location.href = '#newsletter';
+    }
+</script>
 </body>
 
 </html>
