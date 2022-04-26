@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Timups</title>
+  <title>D'Effetto</title>
 
 
   <!-- bootstrap core css -->
@@ -38,7 +38,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>
               Timups
             </span>
@@ -51,7 +51,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
+                <a class="nav-link" href="index.php">Home </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="watches.html"> Watches </a>
@@ -60,7 +60,7 @@
                 <a class="nav-link" href="about.html"> About <span class="sr-only">(current)</span> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
             </ul>
             <div class="user_option-box">
@@ -81,7 +81,7 @@
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
+    <!-- about section -->
 
   <section class="about_section layout_padding">
     <div class="container  ">
@@ -164,7 +164,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  deffetto.style@gmail.com
                 </span>
               </a>
             </div>
@@ -175,9 +175,10 @@
             <h4>
               Subscribe
             </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
+            <form action="index.php#newsletter" method="post">
+              <input type="text" placeholder="Full Name" name="name" />
+              <input type="email" placeholder="Enter email" name="email" />
+              <button type="submit" onClick="goHere()">
                 Subscribe
               </button>
             </form>
