@@ -1,3 +1,13 @@
+<?php
+
+include "src/email.php";
+
+//if form has been submitted 
+if ($_POST) {
+    $return = email($_POST);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +23,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Timups</title>
+  <title>D'Effetto</title>
 
 
   <!-- bootstrap core css -->
@@ -52,7 +62,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
+                <a class="nav-link" href="index.php">Home </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="watches.html"> Watches </a>
@@ -61,7 +71,7 @@
                 <a class="nav-link" href="about.html"> About </a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="contact.php">Contact Us <span class="sr-only">(current)</span> </a>
               </li>
             </ul>
             <div class="user_option-box">
@@ -83,43 +93,72 @@
   </div>
 
   <!-- contact section -->
-
   <section class="contact_section layout_padding">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <div class="form_container">
-            <div class="heading_container">
-              <h2>
-                Contact Us
-              </h2>
-            </div>
-            <form action="">
-              <div>
-                <input type="text" placeholder="Full Name " />
-              </div>
-              <div>
-                <input type="email" placeholder="Email" />
-              </div>
-              <div>
-                <input type="text" placeholder="Phone number" />
-              </div>
-              <div>
-                <input type="text" class="message-box" placeholder="Message" />
-              </div>
-              <div class="d-flex ">
-                <button>
-                  SEND
-                </button>
-              </div>
-            </form>
+
+        <div class="col-md-5">
+          <div class="info-box">
+            <h2>
+              Contact Information
+            </h2>
+            <span>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  Location
+            </span>
+            <span>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+                  Call +01 1234567890
+            </span>
+            <span>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+                  demo@gmail.com
+            </span>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="img-box">
-            <img src="images/contact-img.jpg" alt="">
+          <div class="col-md-7">
+              <div class="form_container">
+                      <div class="heading_container">
+                          <h2 style="text-align: center">
+                              Got a Question?
+                          </h2>
+                          <h3>
+                              We look forward to hear you and help to answer
+                              any question you have
+                          </h3>
+                      </div>
+                  <?php
+                  if ($_POST) {
+                      echo <<<EOT
+<div class="alert">
+<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+$return
+</div>
+EOT;
+                  }
+                  ?>
+                  <form action="contact.php" method="post">
+                      <div>
+                          <input type="text" placeholder="Full Name" name="fullname" />
+                      </div>
+                      <div>
+                          <input type="email" placeholder="Email" name="email"/>
+                      </div>
+                      <div>
+                          <input type="text" placeholder="Subject" name="subject"/>
+                      </div>
+                      <div>
+                 <textarea type="text" class="message-box" name="message" placeholder="Enter your query here..">
+                </textarea>
+                      </div>
+                      <div class="d-flex ">
+                          <button type="submit" value="send">
+                              SEND
+                          </button>
+                      </div>
+                  </form>
+              </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -141,12 +180,6 @@
             <div class="footer_social">
               <a href="">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
               <a href="">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
@@ -172,12 +205,12 @@
                   Call +01 1234567890
                 </span>
               </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
+                <a href="">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span>
+                  deffetto.style@gmail.com
                 </span>
-              </a>
+                </a>
             </div>
           </div>
         </div>
@@ -186,12 +219,13 @@
             <h4>
               Subscribe
             </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
+              <form action="index.php#newsletter" method="post">
+                  <input type="text" placeholder="Full Name" name="name" />
+                  <input type="email" placeholder="Enter email" name="email" />
+                  <button type="submit" onClick="goHere()">
+                      Subscribe
+                  </button>
+              </form>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 footer-col">
