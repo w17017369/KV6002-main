@@ -1,19 +1,20 @@
-<?php 
-require '../toos.func.php';
-require '../db.func.php';
-require 'auth.php';
-require 'header.php';
+<?php
+// error_reporting(0);
+// Session variables are stored in a folder specified below
 
- error_reporting(0);
+ini_set( "session.save_path", "D:\Development\PHP\XMAPP\htdocs\sessionData" );
 
-$uid = getSession('id','shop');
+// Create a new session with a session ID
+session_start();
 
-$prefix=getDBPregix();
-$sql = "SELECT id,price,quantity,products
-        FROM {$prefix}cart WHERE uid = '$uid' AND status='0' ";
-$cart_page_data  = query($sql);
-// var_dump($cart_page_data);die;
+// To establish a connect to the database, PHP code from another file needs to be embedded 
+// require_once( "functions.php" );
+// Make database connection 
+// $connect = getConnection();
 
+$conn = mysqli_connect('localhost','root','sr990611','shop6002') or die('connection failed');
+
+$uid=1;
 
 if(isset($_POST['update_update_btn'])){
    $update_value = $_POST['update_quantity'];
@@ -34,8 +35,14 @@ if(isset($_GET['delete_all'])){
    mysqli_query($conn, "DELETE FROM `cart`");
    header('location:cart.php');
 }
- 
+
+include 'header.php';
+
+
 ?>
+
+
+
 
 
 
@@ -67,7 +74,7 @@ if(isset($_GET['delete_all'])){
          ?>
 
          <tr>
-            <td><img src="uploaded_img/<?php echo $fetch_cart['image']; ?>" height="100" alt=""></td>
+            <td><img src="img/<?php echo $fetch_cart['image']; ?>" height="100" alt=""></td>
             <td><?php echo $fetch_cart['name']; ?></td>
             <td>￡<?php echo number_format($fetch_cart['price']); ?></td>
             <td>
@@ -78,7 +85,7 @@ if(isset($_GET['delete_all'])){
                </form>   
             </td>
             <td>￡<?php echo $sub_total = number_format($fetch_cart['price'] * $fetch_cart['quantity']); ?></td>
-            <td><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('remove item from cart?')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
+            <td><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('remove item from cart?')" class="delete-btn">  remove</a></td>
          </tr>
          <?php
            $grand_total += $sub_total;  
@@ -86,10 +93,10 @@ if(isset($_GET['delete_all'])){
          };
          ?>
          <tr class="table-bottom">
-            <td><a href="index.php" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
+            <td><a href="products.php" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
             <td colspan="3">sub total</td>
             <td>￡<?php echo $grand_total; ?></td>
-            <td><a href="cart.php?delete_all" onclick="return confirm('are you sure you want to delete all?');" class="delete-btn"> <i class="fas fa-trash"></i> delete all </a></td>
+            <td><a href="cart.php?delete_all" onclick="return confirm('are you sure you want to delete all?');" class="delete-btn">  delete all </a></td>
          </tr>
 
       </tbody>
@@ -97,7 +104,7 @@ if(isset($_GET['delete_all'])){
    </table>
 
    <div class="checkout-btn">
-      <a href="checkout" class="btn-checkout <?= ($grand_total > 1)?'':'disabled'; ?>">procced to checkout</a>
+      <a href="checkout.php" class="btn-checkout option-btn <?= ($grand_total > 1)?'':'disabled'; ?>">procced to checkout</a>
    </div>
 
 </section>
@@ -106,7 +113,6 @@ if(isset($_GET['delete_all'])){
 
 
 
-
 <?php 
-require 'footer.php';
+include 'footer.php';
 ?>

@@ -1,15 +1,43 @@
 <?php
 // Session variables are stored in a folder specified below
 
-ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
 
-// Create a new session with a session ID
-session_start();
 
 // To establish a connect to the database, PHP code from another file needs to be embedded 
 require_once( "functions.php" );
 // Make database connection 
 $connect = getConnection();
+
+
+
+
+//-------start----------Add to cart button function
+$login_url = "login.php";
+if(isset($_POST['add_to_cart'])){
+
+  //Check if session variable logged-in exists and whether it is true/false
+  if ( !isset( $_SESSION[ 'logged-in' ] ) ) {
+    header("Location: $login_url");
+  }
+
+   $uid = $_SESSION['user_id'];
+   $product_name = $_POST['hidden_name'];
+   $product_price = $_POST['hidden_price'];
+   $product_image = $_POST['hidden_img'];
+   $product_quantity = $_POST['quantity'];
+
+   $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name'");
+
+   if(mysqli_num_rows($select_cart) > 0){
+      $message[] = 'product already added to cart';
+   }else{
+      $insert_product = mysqli_query($conn, "INSERT INTO `cart`(name, price, image, quantity, uid) VALUES('$product_name', '$product_price', '$product_image', '$product_quantity', '$uid')");
+      $message[] = 'product added to cart succesfully';
+   }
+}
+//-------end----------Add to cart button function
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +56,6 @@ $connect = getConnection();
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
   <title>Black SF signature cap - SF Products</title>
-  
-
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -46,64 +72,44 @@ $connect = getConnection();
 
 </head>
 
+
+
+
+
+<!-- Add to cart successfully alert box -->
+
+<?php
+
+if(isset($message)){
+   foreach($message as $message){
+      echo '<div class="message"><span>'.$message.'</span> <i class="fas fa-times" onclick="this.parentElement.style.display = `none`;"></i> </div>';
+   };
+};
+
+?>
+<!-- Add to cart successfully alert box -->
+
+
+
+
+
+
 <body class="sub_page">
 
   <div class="hero_area">
 
-    <!-- header section starts -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              <!-- Logo Image --> 
-    <img src="img/logo.png" class="logo" alt="">
-            </span>
-          </a>
+    
+<?php
+  include 'header.php';
+?>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="products.php"> Products <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
-              </li>
-            </ul>
-            <div class="user_option-box">
-              <a href="">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-cart-plus" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-  </div>
 	
 	<!-- main section -->
 <main>
 <div class="container py-5">
 <div class="row">
 <div class="col">
-  <div class="box">  <img id="myImg" src="img/blackcap.png" alt="SF black cap">  </div>
+  <div class="box">  <img id="myImg" name="myImg" src="img/blackcap.png" alt="SF black cap">  </div>
 </div>
 	
 	<!-- The Modal -->
@@ -115,8 +121,6 @@ $connect = getConnection();
 
 <?php
 
-$dbConn = getConnection();
-
 
 // Create the Publisher query - SELECT 
 $query = "SELECT * FROM product WHERE proid = 'p1'";
@@ -124,7 +128,11 @@ $query = "SELECT * FROM product WHERE proid = 'p1'";
 $statement = $connect->prepare( $query );
 $statement->execute();
 $result = $statement->fetchObject();
+
+
 ?>
+
+
 <div class="col box textContainer">
   <div>
   <!-- Display the results in the form format -->
@@ -146,10 +154,11 @@ $result = $statement->fetchObject();
       <span>
       <input type="number" name="quantity" id="quantity" value="1" class="form-control" autocomplete="off"  min="1" max="5"/>
       </span> </div>
+    <input type="hidden" name="hidden_img" value="blackcap.png" />
     <input type="hidden" name="hidden_name" value="<?php echo "{$result->name}" ?>" />
     <input type="hidden" name="hidden_price" value="<?php echo "{$result->price}"?>" />
     <input type="hidden" name="hidden_id" value="<?php echo "{$result->proid}" ?>" />
-    <button type="submit" name="add_to_cart" class="btn btn-success submit-btn">Add to Cart</button>
+    <input type="submit" name="add_to_cart" class="btn btn-success submit-btn" value="Add to Cart"></button>
     </div>
   </form>
 </div>

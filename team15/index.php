@@ -1,6 +1,6 @@
 <?php
   //sessionData path
-  ini_set( "session.save_path", "/home/unn_w17017369/public_html/team15_practice/sessionData" );
+  ini_set( "session.save_path", "D:\Development\PHP\XMAPP\htdocs\sessionData" );
 
   //Create a new session with a session ID
   session_start();

@@ -1,7 +1,7 @@
 <?php 
 error_reporting(0);
-require '../toos.func.php';
-require '../db.func.php';
+require 'toos.func.php';
+require 'db.func.php';
 require 'header.php';
 // require 'auth.php';
 session_start();
@@ -17,7 +17,7 @@ $sql = "SELECT * FROM topic WHERE id={$id} ";
 
  $topic = queryOne($sql);
  function findname($id){
-  $sql = "select * from cc_user where id = {$id} ";
+  $sql = "select * from dsf_users where userid = {$id} ";
   $res = queryOne($sql);
   return $res['username'];
  }

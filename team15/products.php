@@ -1,12 +1,14 @@
 <?php
-// Session variables are stored in a folder specified below
-
-//ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
-
-ini_set( "session.save_path", "/home/unn_w17017369/public_html/team15_practice/sessionData" );
-
-// Create a new session with a session ID
- session_start();
+// To establish a connect to the database, PHP code from another file needs to be embedded 
+require_once( "functions.php" );
+// Make database connection 
+$cart_url = "login.php";
+$row_count = "";
+if ( isset( $_SESSION[ 'logged-in' ] ) ) {
+    $cart_url = "cart.php";
+    $select_rows = mysqli_query($conn, "SELECT * FROM `cart`") or die('query failed');
+    $row_count = mysqli_num_rows($select_rows);
+}
 
 ?>
 
@@ -82,8 +84,9 @@ ini_set( "session.save_path", "/home/unn_w17017369/public_html/team15_practice/s
               <a href="">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="<?php echo $cart_url ?>">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                <span style="color: white"><?php echo $row_count; ?></span>
               </a>
               <a href="">
                 <i class="fa fa-search" aria-hidden="true"></i>

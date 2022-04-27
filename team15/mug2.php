@@ -1,17 +1,51 @@
 <?php
 // Session variables are stored in a folder specified below
 
-ini_set( "session.save_path", "/home/unn_w19015804/sessionData" );
 
-// Create a new session with a session ID
-session_start();
 
 // To establish a connect to the database, PHP code from another file needs to be embedded 
 require_once( "functions.php" );
 // Make database connection 
 $connect = getConnection();
 
+
+
+
+//-------start----------Add to cart button function
+$login_url = "login.php";
+if(isset($_POST['add_to_cart'])){
+
+  //Check if session variable logged-in exists and whether it is true/false
+  if ( !isset( $_SESSION[ 'logged-in' ] ) ) {
+    header("Location: $login_url");
+  }
+
+   $uid = $_SESSION['user_id'];
+   $product_name = $_POST['hidden_name'];
+   $product_price = $_POST['hidden_price'];
+   $product_image = "mug2.png";
+   $product_quantity = $_POST['quantity'];
+
+   $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name'");
+
+   if(mysqli_num_rows($select_cart) > 0){
+      $message[] = 'product already added to cart';
+   }else{
+      $insert_product = mysqli_query($conn, "INSERT INTO `cart`(name, price, image, quantity, uid) VALUES('$product_name', '$product_price', '$product_image', '$product_quantity', '$uid')");
+      $message[] = 'product added to cart succesfully';
+   }
+}
+
+
+if(isset($message)){
+   foreach($message as $message){
+      echo '<div class="message"><span>'.$message.'</span> <i class="fas fa-times" onclick="this.parentElement.style.display = `none`;"></i> </div>';
+   }
+}
+//-------end----------Add to cart button function
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,8 +1,23 @@
 <?php
+error_reporting(0);
+	//sessionData path
+ini_set( "session.save_path", "D:\Development\PHP\XMAPP\htdocs\sessionData" );
+
+
+$dbHost = 'localhost';
+$dbUsername = 'root';
+$dbPassword = 'sr990611';
+$dbName = 'shop6002';
+
+$conn = mysqli_connect($dbHost,$dbUsername,$dbPassword,$dbName) or die('connection failed');
+
+//Create a new session with a session ID
+session_start();
+
 	//Function to connect to database
 	function getConnection() {
 		try {
-			$connection = new PDO( "mysql:host=localhost;dbname=unn_w19020174", "unn_w19020174", "PnaMtn94" );
+			$connection = new PDO( "mysql:host=localhost;dbname=shop6002", "root", "sr990611" );
 			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $connection;
 		} 

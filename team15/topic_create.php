@@ -1,6 +1,6 @@
 <?php 
-require '../db.func.php';
-require '../toos.func.php';
+require 'db.func.php';
+require 'toos.func.php';
 session_start();
 $uid = $_SESSION['user']['id'];
  if(!empty($_POST['title'])){
