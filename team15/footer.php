@@ -1,5 +1,6 @@
 
-<footer class="footer_section">
+ <!-- footer section -->
+  <footer class="footer_section">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-lg-3 footer-col">
@@ -47,7 +48,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  deffetto.style@gmail.com
                 </span>
               </a>
             </div>
@@ -58,9 +59,10 @@
             <h4>
               Subscribe
             </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
+            <form action="index.php#newsletter" method="post">
+              <input type="text" placeholder="Full Name" name="name" />
+              <input type="email" placeholder="Enter email" name="email" />
+              <button type="submit" onClick="goHere()">
                 Subscribe
               </button>
             </form>
@@ -82,6 +84,8 @@
       </div>
     </div>
   </footer>
+  <!-- footer section -->
+
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
 <!-- jQery -->
