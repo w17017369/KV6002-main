@@ -9,7 +9,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-function email($input): string
+function email($input)
 {
     include 'functions.php';
     include 'config/config.php';

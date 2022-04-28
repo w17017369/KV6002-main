@@ -13,6 +13,8 @@ use PDOException;
 
 include 'functions.php';
 
+require "vendor/autoload.php";
+
 class Payment
 {
     private Database $database;
@@ -27,6 +29,11 @@ class Payment
      *
      */
     public function insert($details)
+    {
+
+    }
+
+    public function ()
     {
 
     }

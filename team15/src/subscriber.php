@@ -16,7 +16,7 @@ include 'functions.php';
 
 class Subscriber
 {
-    private Database $database;
+    private $database;
 
     public function __construct()
     {
@@ -25,7 +25,7 @@ class Subscriber
 /**
  * Insert new record into subscriber table
  */
-    public function subscribe($input): string
+    public function subscribe($input)
     {
         $input['email'] = filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null;
         $input['name'] = filter_has_var(INPUT_POST, 'name') ? $_POST['name'] : null;
@@ -65,7 +65,7 @@ class Subscriber
 /**
  * Delete a record from subscriber table
  */
-    public function delete($email): void
+    public function delete($email)
     {
         $sql = "DELETE FROM subscriber WHERE email = :email";
         $this->database->executeSQL($sql, [":email" => $email]);

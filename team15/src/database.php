@@ -21,11 +21,11 @@ class Database
      * @var string $password
      *
      */
-    private PDO $dbConnection;
-    private string $host;
-    private string $dbName;
-    private string $username;
-    private string $password;
+    private $dbConnection;
+    private $host;
+    private $dbName;
+    private $username;
+    private $password;
 
     /**
      * constructor that set a mysql database connection or throw an exception
@@ -49,7 +49,7 @@ class Database
      * @return void
      */
 
-    private function setDbConnection(): void
+    private function setDbConnection()
     {
         if (
             $this->dbConnection = new PDO(
@@ -66,7 +66,7 @@ class Database
     /**
      * @return PDO
      */
-    public function getDbConnection(): PDO
+    public function getDbConnection()
     {
         return $this->dbConnection;
     }
@@ -81,7 +81,7 @@ class Database
      * @return array            An associative array of the query results
      *
      */
-    public function executeSQL(string $sql, array $params = []): array
+    public function executeSQL($sql, $params = [])
     {
         $stmt = $this->dbConnection->prepare($sql);
         $stmt->execute($params);
