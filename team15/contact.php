@@ -1,8 +1,14 @@
 <?php
 
+//sessionData path
+ini_set( "session.save_path", "/home/unn_w19020174/sessionData");
+if ( ! session_id() ) {
+    //Create a new session with a session ID
+    session_start();
+}
+
 include "src/email.php";
 
-//if form has been submitted 
 if ($_POST) {
     $return = email($_POST);
 }
@@ -25,7 +31,6 @@ if ($_POST) {
 
   <title>D'Effetto</title>
 
-
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--owl slider stylesheet -->
@@ -39,59 +44,141 @@ if ($_POST) {
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+    <!-- Account pages style-->
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- Responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+    <script src="script.js"></script>
+
 </head>
 
 <body class="sub_page">
 
   <div class="hero_area">
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              Timups
-            </span>
-          </a>
+      <!-- header section strats -->
+      <header class="header_section">
+          <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg custom_nav-container ">
+                  <a class="navbar-brand" href="index.php">
+                      <img src="images/logo/logo.png">
+                  </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class=""> </span>
+                  </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.php">Home </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="watches.html"> Watches </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About </a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="contact.php">Contact Us <span class="sr-only">(current)</span> </a>
-              </li>
-            </ul>
-            <div class="user_option-box">
-              <a href="">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-cart-plus" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </a>
-            </div>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav">
+                          <li class="nav-item active">
+                              <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="products.php"> Products </a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="about.php"> About </a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="contact.php">Contact Us</a>
+                          </li>
+                      </ul>
+                      <div class="user_option-box">
+                          <!-- Check if user is logged in\out to display correct button -->
+                          <?php
+                          try {
+                              //Link functions to get db connection, error functions and log in functions
+                              require_once("src/functions.php");
+                              //Check if session variable logged-in exists and whether it is true/false
+                              if ( isset( $_SESSION[ 'logged-in' ] ) ) {
+                                  if ( check_login() ) {
+                                      //Check if role exists
+                                      if (isset($_SESSION[ 'role'])) {
+                                          //If so check if role is admin
+                                          if ($_SESSION[ 'role'] == 0) {
+                                              //If admin display admin within dropdown
+                                              echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='admin.php'>Admin</a></li>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                          } else {
+                                              //If customer dispay normal dropdown
+                                              echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                          }
+                                      } else {
+
+//If role cannot be checked display regular dropdown
+                                          echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                      }
+                                  }
+                              } else {
+                                  //If false display account and log in
+                                  echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='login.php'>Login</a></li>
+ </ul>
+ </div>";
+                              }
+                          } catch ( Exception $e ) {
+                              //Output error message - this error message has to be short because it will be displayed in place of login button
+                              echo "<p>Unavaialble</p>\n";
+                              //Log error
+                              log_error( $e );
+                          }
+                          ?>
+                          <a href="cart.php">
+                              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                          </a>
+                          <a href="#" data-toggle="collapse" data-target="#demo">
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                          </a>
+                      </div>
+                  </div>
+              </nav>
           </div>
-        </nav>
-      </div>
-    </header>
+      </header>
     <!-- end header section -->
   </div>
+  <!-- search box -->
+  <section class="search_section">
+      <div id="demo" class="col-md-12 collapse searchBar">
+          <form action="" method="get">
+              <input type="text" placeholder="search">
+              <button type="submit" class=""><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
 
+      </div>
+  </section>
+  <!-- end search box -->
   <!-- contact section -->
   <section class="contact_section layout_padding">
     <div class="container">
@@ -112,7 +199,7 @@ if ($_POST) {
             </span>
             <span>
               <i class="fa fa-envelope" aria-hidden="true"></i>
-                  demo@gmail.com
+                  deffetto.style@gmail.com
             </span>
           </div>
         </div>
