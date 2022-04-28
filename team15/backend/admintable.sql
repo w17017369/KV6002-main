@@ -81,7 +81,7 @@ INSERT INTO `cc_mess` VALUES (40, 33, '21321', '123123', 1647358384);
 DROP TABLE IF EXISTS `cc_newsletter`;
 CREATE TABLE `cc_newsletter`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Title',
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
@@ -122,8 +122,8 @@ CREATE TABLE `cc_order`  (
 -- ----------------------------
 -- Records of cc_order
 -- ----------------------------
-INSERT INTO `cc_order` VALUES (37, 123.00, 0.00, 2, '28', 33, 1647362894, 'xxx street', 'Out Of Stock', NULL, 'B202204242318', 1, '私密发货', 'UPS', 9.90, '2022-04-25 21:48:30', '2022-04-15 21:55:07', '2022-04-12 21:55:15');
-INSERT INTO `cc_order` VALUES (38, 123.00, 0.00, 2, '28', 33, 1647363075, 'xxx street', 'Out Of Stock', NULL, 'B202204242012', -1, '私密发货', 'UPS', 9.90, '2022-04-25 21:48:35', '2022-04-20 21:55:11', '2022-04-21 21:55:19');
+INSERT INTO `cc_order` VALUES (37, 123.00, 0.00, 2, '28', 33, 1647362894, 'xxx street', 'Out Of Stock', NULL, 'B202204242318', 1, 'Private delivery', 'UPS', 9.90, '2022-04-25 21:48:30', '2022-04-15 21:55:07', '2022-04-12 21:55:15');
+INSERT INTO `cc_order` VALUES (38, 123.00, 0.00, 2, '28', 33, 1647363075, 'xxx street', 'Out Of Stock', NULL, 'B202204242012', -1, 'Private delivery', 'UPS', 9.90, '2022-04-25 21:48:35', '2022-04-20 21:55:11', '2022-04-21 21:55:19');
 
 -- ----------------------------
 -- Table structure for cc_products
@@ -149,8 +149,6 @@ CREATE TABLE `cc_products`  (
 -- Records of cc_products
 -- ----------------------------
 INSERT INTO `cc_products` VALUES (28, 6, 'ceshi', '11-231', '123123', 1, 123.00, '2022-03-15 23:00:46', 'upload/1651167799微信图片_20210624183100.jpg', NULL, NULL, 1);
-INSERT INTO `cc_products` VALUES (29, 6, '产品01', '11-32123123', '产品介绍', 999, 199.00, '2022-03-15 23:01:01', 'upload/1651167680微信图片_20210624183115.jpg', NULL, NULL, 2);
-INSERT INTO `cc_products` VALUES (30, 7, '商品03', '7-4727', '商品描述', 99, 88.00, '2022-04-29 01:55:18', NULL, NULL, NULL, 3);
 
 -- ----------------------------
 -- Table structure for cc_type
