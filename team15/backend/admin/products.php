@@ -113,8 +113,8 @@ require 'header.php';
     <script>
         function nofind(){
             var img=event.srcElement;
-            img.src="imgs/img_error.png"; //替换的图片
-            img.οnerrοr=null; //控制不要一直触发错误
+            img.src="imgs/img_error.png"; //Replacement images
+            img.οnerrοr=null; //Control not to keep triggering errors
         }
     </script>
 <?php
