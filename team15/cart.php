@@ -1,20 +1,7 @@
 <?php
-// error_reporting(0);
-// Session variables are stored in a folder specified below
+include 'functions.php';
 
-ini_set( "session.save_path", "D:\Development\PHP\XMAPP\htdocs\sessionData" );
-
-// Create a new session with a session ID
-session_start();
-
-// To establish a connect to the database, PHP code from another file needs to be embedded 
-// require_once( "functions.php" );
-// Make database connection 
-// $connect = getConnection();
-
-$conn = mysqli_connect('localhost','root','sr990611','shop6002') or die('connection failed');
-
-$uid=1;
+$uid = $_SESSION[ 'user_id'];
 
 if(isset($_POST['update_update_btn'])){
    $update_value = $_POST['update_quantity'];

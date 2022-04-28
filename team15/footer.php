@@ -1,5 +1,6 @@
 
-<footer class="footer_section">
+ <!-- footer section -->
+  <footer class="footer_section">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-lg-3 footer-col">
@@ -47,7 +48,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  deffetto.style@gmail.com
                 </span>
               </a>
             </div>
@@ -58,9 +59,10 @@
             <h4>
               Subscribe
             </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
+            <form action="index.php#newsletter" method="post">
+              <input type="text" placeholder="Full Name" name="name" />
+              <input type="email" placeholder="Enter email" name="email" />
+              <button type="submit" onClick="goHere()">
                 Subscribe
               </button>
             </form>
@@ -82,6 +84,8 @@
       </div>
     </div>
   </footer>
+  <!-- footer section -->
+
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
 <!-- jQery -->
@@ -97,8 +101,53 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
   <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAvKZN-V6xzNr3Vz13AgCHCpdZ5q8qSyRw&callback=initMap" async defer></script>
   <!-- End Google Map -->
+
+  <script type="text/javascript">
+    function initMap() {
+
+    function AddCustomControl(controlDiv, map) {
+
+        google.maps.event.addDomListener(controlDiv, 'click', function() {
+
+        });
+    }
+    
+    var myLatlng = new google.maps.LatLng(54.977775, -1.604488);
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: true,
+            overviewMapControl: false,
+            rotateControl: false,
+            scaleControl: false,
+            panControl: false,
+
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"),
+            mapOptions);
+
+        var customControlDiv = document.createElement('div');
+        customControlDiv.id="customControlDiv";
+        AddCustomControl(customControlDiv, map);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(customControlDiv);
+
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: "Northumbria University"
+        });
+
+        marker.setMap(map);
+}
+
+
+  </script>
+
   </body>
 </html>
 

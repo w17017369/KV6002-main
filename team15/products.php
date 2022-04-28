@@ -50,51 +50,90 @@ if ( isset( $_SESSION[ 'logged-in' ] ) ) {
 
   <div class="hero_area">
 
-    <!-- header section starts -->
+<!-- header section starts -->
     <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              <!-- Logo Image --> 
-    <img src="img/logo.png" class="logo" alt="">
-            </span>
-          </a>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.php">
+                    <span>
+                    <!-- Logo Image --> 
+                    <img src="img/logo.png" class="logo" alt="">
+                    </span>
+                </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="products.php"> Products <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
-              </li>
-            </ul>
-            <div class="user_option-box">
-              <a href="">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a href="<?php echo $cart_url ?>">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.php"> Products </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.php"> About </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="forum.php"> Forum </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.php">Contact Us</a>
+                        </li>
+                    </ul>
+                    <div class="user_option-box">
+                        <?php
+                        try {
+                            //Link functions to get db connection, error functions and log in functions
+                            require_once( "src/functions.php" );
+
+                            //Check if session variable logged-in exists and whether it is true/false
+                            if ( isset( $_SESSION[ 'logged-in' ] ) ) {
+                                if ( check_login() ) {
+                                    //If true display account and log out
+                                    echo "<div class='dropdown'>
+                      <button class='btn' type='button' data-toggle='dropdown'>
+                        <i class='fa fa-user' aria-hidden='true'></i>
+                      </button>
+                      <ul class='dropdown-menu'>
+                        <li><a href='profile.php'>Account</a></li>
+                        <li><a href='logout.php'>Log out</a></li>
+                      </ul>
+                    </div>";
+                                }
+                            } else {
+                                //If false display account and log in
+                                echo "<div class='dropdown'>
+                    <button class='btn' type='button' data-toggle='dropdown'>
+                      <i class='fa fa-user' aria-hidden='true'></i>
+                    </button>
+                    <ul class='dropdown-menu'>
+                      <li><a href='profile.php'>Account</a></li>
+                      <li><a href='login.php'>Login</a></li>
+                    </ul>
+                  </div>";
+                            }
+                        } catch ( Exception $e ) {
+                            //Output error message - this error message has to be short because it will be displayed in place of login button
+                            echo "<p>Unavaialble</p>\n";
+
+                            //Log error
+                            log_error( $e );
+                        }
+                        ?>
+                        <a href="<?php echo $cart_url ?>">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
                 <span style="color: white"><?php echo $row_count; ?></span>
               </a>
-              <a href="">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </nav>
-      </div>
+                        <a href="">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
     <!-- end header section -->
   </div>
@@ -819,87 +858,6 @@ if ( isset( $_SESSION[ 'logged-in' ] ) ) {
     </div>
   </section>
 
-  <!-- end shop section -->
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_detail">
-            <h4>
-              About
-            </h4>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-            </p>
-            <div class="footer_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Reach at..
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Subscribe
-            </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer-col">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> D’Effetto Style by Fancello. All Rights Reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
-  <!-- footer section -->
-
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
@@ -912,8 +870,8 @@ if ( isset( $_SESSION[ 'logged-in' ] ) ) {
   </script>
   <!-- custom js -->
   <script src="product.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
-</body>
-</html>
+
+  <!-- end shop section -->
+<?php
+  include 'footer.php';
+?>

@@ -287,3 +287,42 @@ Wed Apr 27 21:44:02 CEST 2022|Trying to get property 'name' of non-object
 Wed Apr 27 21:44:02 CEST 2022|Trying to get property 'name' of non-object
 Wed Apr 27 21:44:15 CEST 2022|Trying to get property 'name' of non-object
 Wed Apr 27 21:44:26 CEST 2022|Trying to get property 'name' of non-object
+Thu Apr 28 15:35:30 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:35:30 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:35:37 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:35:37 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:35:43 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:35:43 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:36:05 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:36:05 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:36:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:36:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:37:04 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:37:04 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:37:08 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:37:08 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:37:10 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:37:10 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:07 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:07 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:08 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:08 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:17 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:29 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:29 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:36 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.favourites' doesn't exist
+Thu Apr 28 15:38:40 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:38:40 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.orders' doesn't exist
+Thu Apr 28 15:38:46 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:38:46 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:19 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:20 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:21 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:21 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:22 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:22 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:23 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
+Thu Apr 28 15:39:23 CEST 2022|SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop6002.address_info' doesn't exist
