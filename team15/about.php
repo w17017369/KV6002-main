@@ -1,15 +1,13 @@
 <?php
 //sessionData path
-//ini_set( "session.save_path", "/tmp" );
-
-//Create a new session with a session ID
-session_start();
-
-//include config.php
+ini_set( "session.save_path", "/home/unn_w19020174/sessionData");
+if ( ! session_id() ) {
+    //Create a new session with a session ID
+    session_start();
+}
 include "config/config.php";
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,32 +22,35 @@ include "config/config.php";
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
     <title>D'Effetto</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <!--owl slider stylesheet -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
     <!-- font awesome style -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="assets/css/responsive.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
 
     <!-- Account pages style-->
-    <link href="assets/css/profile.css" rel="stylesheet" type="text/css" />
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <!-- Responsive style -->
-    <link href="assets/css/responsive.css" rel="stylesheet" />
-    <script src="script.js"></script>
+    <link href="css/responsive.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="toggled-search-bar.js"></script>
 </head>
 
 <body class="sub_page">
@@ -61,7 +62,7 @@ include "config/config.php";
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="index.php">
-                    <img src="assets/images/logo/logo.png">
+                    <img src="images/logo/logo.png">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,41 +85,70 @@ include "config/config.php";
                         </li>
                     </ul>
                     <div class="user_option-box">
+                        <!-- Check if user is logged in\out to display correct button -->
                         <?php
                         try {
                             //Link functions to get db connection, error functions and log in functions
-                            require_once( "src/functions.php" );
-
+                            require_once("src/functions.php");
                             //Check if session variable logged-in exists and whether it is true/false
                             if ( isset( $_SESSION[ 'logged-in' ] ) ) {
                                 if ( check_login() ) {
-                                    //If true display account and log out
-                                    echo "<div class='dropdown'>
-                      <button class='btn' type='button' data-toggle='dropdown'>
-                        <i class='fa fa-user' aria-hidden='true'></i>
-                      </button>
-                      <ul class='dropdown-menu'>
-                        <li><a href='profile.php'>Account</a></li>
-                        <li><a href='logout.php'>Log out</a></li>
-                      </ul>
-                    </div>";
+                                    //Check if role exists
+                                    if (isset($_SESSION[ 'role'])) {
+                                        //If so check if role is admin
+                                        if ($_SESSION[ 'role'] == 0) {
+                                            //If admin display admin within dropdown
+                                            echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='admin.php'>Admin</a></li>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                        } else {
+                                            //If customer dispay normal dropdown
+                                            echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                        }
+                                    } else {
+
+//If role cannot be checked display regular dropdown
+                                        echo "<div class='dropdown'>
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='logout.php'>Log out</a></li>
+ </ul>
+ </div>";
+                                    }
                                 }
                             } else {
                                 //If false display account and log in
                                 echo "<div class='dropdown'>
-                    <button class='btn' type='button' data-toggle='dropdown'>
-                      <i class='fa fa-user' aria-hidden='true'></i>
-                    </button>
-                    <ul class='dropdown-menu'>
-                      <li><a href='profile.php'>Account</a></li>
-                      <li><a href='login.php'>Login</a></li>
-                    </ul>
-                  </div>";
+ <button class='btn' type='button' data-toggle='dropdown'>
+ <i class='fa fa-user' aria-hidden='true'></i>
+ </button>
+ <ul class='dropdown-menu'>
+ <li><a href='profile.php'>Account</a></li>
+ <li><a href='login.php'>Login</a></li>
+ </ul>
+ </div>";
                             }
                         } catch ( Exception $e ) {
                             //Output error message - this error message has to be short because it will be displayed in place of login button
                             echo "<p>Unavaialble</p>\n";
-
                             //Log error
                             log_error( $e );
                         }
@@ -126,7 +156,7 @@ include "config/config.php";
                         <a href="cart.php">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
-                        <a href="">
+                        <a href="#" data-toggle="collapse" data-target="#demo">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -134,9 +164,19 @@ include "config/config.php";
             </nav>
         </div>
     </header>
-
     <!-- end header section -->
   </div>
+<!-- search box -->
+  <section class="search_section">
+      <div id="demo" class="col-md-12 collapse searchBar">
+          <form action="" method="get">
+              <input type="text" placeholder="search">
+              <button type="submit" class=""><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
+
+      </div>
+  </section>
+<!-- end search box -->
 
   <!-- about section -->
 
@@ -145,7 +185,7 @@ include "config/config.php";
       <div class="row">
         <div class="col-md-6 col-lg-5 ">
           <div class="img-box">
-            <img src="assets/images/about-img.png" alt="">
+            <img src="images/about-img.png" alt="">
           </div>
         </div>
         <div class="col-md-6 col-lg-7">
